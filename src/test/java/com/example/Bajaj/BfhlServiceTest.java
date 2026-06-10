@@ -89,29 +89,29 @@ class BfhlServiceTest {
     }
 
     // ==================== Example C ====================
-    // Input: ["aA", "bC", "dD", "ABCD"]
-    // All alpha chars: a, A, b, C, d, D, A, B, C, D
-    // Reversed: D, C, B, A, D, d, C, b, A, a
-    // Alternating caps (0=upper): D, c, B, a, D, d, C, b, A, a
-    // concat_string = "DcBaDdCbAa"
+    // Input: ["aA", "bC", "dD", "oE"]
+    // All alpha chars: a, A, b, C, d, D, o, E
+    // Reversed: E, o, D, d, C, b, A, a
+    // Alternating caps (0=upper): E, o, D, d, C, b, A, a
+    // concat_string = "EoDdCbAa"
     @Test
     void testExampleC_alphabets() {
-        BfhlResponse res = process("aA", "bC", "dD", "ABCD");
-        assertEquals(List.of("AA", "BC", "DD", "ABCD"), res.getAlphabets());
+        BfhlResponse res = process("aA", "bC", "dD", "oE");
+        assertEquals(List.of("AA", "BC", "DD", "OE"), res.getAlphabets());
     }
 
     @Test
     void testExampleC_concatString() {
-        BfhlResponse res = process("aA", "bC", "dD", "ABCD");
-        // Collected chars: aAbCdDABCD
-        // Reversed:        DCBAdDCbAa
-        // Alt caps (0=U):  DcBaDdCbAa
-        assertEquals("DcBaDdCbAa", res.getConcatString());
+        BfhlResponse res = process("aA", "bC", "dD", "oE");
+        // Collected chars: aAbCdDoE
+        // Reversed:        EoDdCbAa
+        // Alt caps (0=U):  EoDdCbAa
+        assertEquals("EoDdCbAa", res.getConcatString());
     }
 
     @Test
     void testExampleC_sum() {
-        BfhlResponse res = process("aA", "bC", "dD", "ABCD");
+        BfhlResponse res = process("aA", "bC", "dD", "oE");
         assertEquals("0", res.getSum());
     }
 
@@ -119,7 +119,7 @@ class BfhlServiceTest {
     @Test
     void testEmptyArray() {
         BfhlResponse res = process();
-        assertTrue(res.isSuccess());
+        assertTrue(res.getIsSuccess());
         assertTrue(res.getOddNumbers().isEmpty());
         assertTrue(res.getEvenNumbers().isEmpty());
         assertTrue(res.getAlphabets().isEmpty());
@@ -162,7 +162,7 @@ class BfhlServiceTest {
     @Test
     void testIsSuccess() {
         BfhlResponse res = process("1");
-        assertTrue(res.isSuccess());
+        assertTrue(res.getIsSuccess());
     }
 
     // ==================== Helper ====================

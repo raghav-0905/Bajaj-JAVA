@@ -8,19 +8,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/bfhl")
 public class BfhlController {
 
     @Autowired
     private BfhlService bfhlService;
 
-    @GetMapping
+    @GetMapping("/bfhl")
     public ResponseEntity<?> getOperationCode() {
         return ResponseEntity.ok(java.util.Map.of("operation_code", 1));
     }
 
-    @PostMapping
+    @PostMapping("/bfhl")
     public ResponseEntity<BfhlResponse> process(@RequestBody BfhlRequest request) {
         return ResponseEntity.ok(bfhlService.processData(request));
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        return ResponseEntity.ok(java.util.Map.of("status", "UP"));
+    }
 }
+

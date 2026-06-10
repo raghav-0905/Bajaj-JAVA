@@ -14,6 +14,11 @@ public class BfhlController {
     @Autowired
     private BfhlService bfhlService;
 
+    @GetMapping
+    public ResponseEntity<?> getOperationCode() {
+        return ResponseEntity.ok(java.util.Map.of("operation_code", 1));
+    }
+
     @PostMapping
     public ResponseEntity<BfhlResponse> process(@RequestBody BfhlRequest request) {
         return ResponseEntity.ok(bfhlService.processData(request));
